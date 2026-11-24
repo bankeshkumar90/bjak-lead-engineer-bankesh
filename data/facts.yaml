@@ -1,0 +1,226 @@
+facts:
+  - id: FACT-001
+    category: EMPLOYMENT
+    title: Current Role at Wipro
+    content: "Bankesh Kumar currently serves as Technical Lead at Wipro from June 2024 to Present, leading engineering initiatives and driving technical strategy for enterprise-scale solutions."
+    source: "cv.md#wipro"
+    keywords: ["current role", "wipro", "technical lead", "architect", "june 2024", "present"]
+    metadata:
+      employer: "Wipro"
+      title: "Technical Lead"
+      start_year: "2024"
+      end_year: "2026"
+
+  - id: FACT-002
+    category: PROJECT
+    title: White Label Taxi Booking App - CabCharge
+    content: "At Wipro, Bankesh architected and developed a scalable white-label React Native platform (CabCharge) for the automotive industry, using Clean Architecture, RTK Query, MMKV, and Google Maps to enable multiple enterprise deployments from a single codebase."
+    source: "cv.md#wipro"
+    keywords: ["cabcharge", "taxi app", "white label", "react native", "mmkv", "rtk query", "clean architecture", "google maps"]
+    metadata:
+      employer: "Wipro"
+      project: "CabCharge White Label Taxi App"
+      tech: "React Native, TypeScript, MMKV, RTK Query, Google Maps"
+
+  - id: FACT-003
+    category: PROJECT
+    title: Insurance & Wellbeing App - Aviva
+    content: "At Wipro, Bankesh led the cross-functional mobile team delivering the Aviva cross-platform insurance and wellbeing app, implementing deep-linking between group apps (MyWorkplace, DW Wealth) and integrating SonarQube to raise code quality."
+    source: "cv.md#wipro"
+    keywords: ["aviva", "insurance", "wellbeing", "deep-linking", "sonarqube", "tech lead"]
+    metadata:
+      employer: "Wipro"
+      project: "Aviva Insurance & Wellbeing App"
+
+  - id: FACT-004
+    category: ARCHITECTURE
+    title: Backend API Platform Microservices Architecture
+    content: "Bankesh architected (LLD & HLD) a local microservices architecture using Java, Spring Boot, Spring Cloud, Eureka Service Registry, API Gateway, and Config Server for backend system design, routing, and mobile integration."
+    source: "cv.md#wipro"
+    keywords: ["backend", "microservices", "spring boot", "spring cloud", "eureka", "api gateway", "config server", "java"]
+    metadata:
+      tech: "Spring Boot, Spring Cloud, Eureka, API Gateway, Docker, Java"
+
+  - id: FACT-005
+    category: EMPLOYMENT
+    title: Lead Engineer / Architect at ZoomCar
+    content: "Bankesh served as Lead Engineer / Architect at ZoomCar India Pvt. Ltd. from November 2023 to March 2024, architecting the unified Zoom One platform."
+    source: "cv.md#zoomcar"
+    keywords: ["zoomcar", "lead engineer", "architect", "zoom one", "nov 2023", "mar 2024"]
+    metadata:
+      employer: "ZoomCar India Pvt. Ltd."
+      title: "Lead Engineer / Architect"
+      start_year: "2023"
+      end_year: "2024"
+
+  - id: FACT-006
+    category: PROJECT
+    title: Zoom One Unified Car Rental Platform
+    content: "At ZoomCar, Bankesh merged separate Guest and Host applications into the unified Zoom One platform via a centralized core module with shared ViewModel and APIVM layers, integrating CleverTap, Crashlytics, and a React Native bridge for phased rollout."
+    source: "cv.md#zoomcar"
+    keywords: ["zoom one", "guest", "host", "clevertap", "crashlytics", "react native bridge", "ktor", "kotlin multiplatform"]
+    metadata:
+      project: "Zoom One"
+      tech: "React Native, Kotlin Multiplatform, KTOR, Redux, Jetpack Compose"
+
+  - id: FACT-007
+    category: EMPLOYMENT
+    title: Senior Software Engineer / Architect at Tekion
+    content: "From March 2022 to June 2023, Bankesh was Senior Software Engineer / Architect at Tekion India Pvt. Ltd., architecting digital display and Android TV Set-Top-Box platforms for US automotive dealerships."
+    source: "cv.md#tekion"
+    keywords: ["tekion", "senior software engineer", "architect", "ott tv", "android tv", "automotive"]
+    metadata:
+      employer: "Tekion India Pvt. Ltd."
+      title: "Senior Software Engineer / Architect"
+      start_year: "2022"
+      end_year: "2023"
+
+  - id: FACT-008
+    category: PROJECT
+    title: OTT TV App and System App Firmware Bridge at Tekion
+    content: "At Tekion, Bankesh built an Android TV OTT app and heartbeat system bridge using Kotlin, MQTT, GraphQL, Room, and ExoPlayer, incorporating RFID Communicator and real-time repair order tracking."
+    source: "cv.md#tekion"
+    keywords: ["ott tv", "mqtt", "rfid", "graphql", "exoplayer", "firmware bridge", "set-top-box"]
+    metadata:
+      tech: "Kotlin, MQTT, GraphQL, Room, ExoPlayer, Android TV"
+
+  - id: FACT-009
+    category: EMPLOYMENT
+    title: Senior Software Engineer / Lead at Zibal Tech
+    content: "From April 2020 to February 2022, Bankesh was Senior Software Engineer / Lead at Zibal Tech Pvt. Ltd., leading development of the StrataGem CMMI Level 5 multiplayer game, N-Radius food delivery app, and SmartCat ML data tool."
+    source: "cv.md#zibal-tech"
+    keywords: ["zibal tech", "stratagem", "n-radius", "smartcat", "cmmi level 5", "lead engineer"]
+    metadata:
+      employer: "Zibal Tech Pvt. Ltd."
+      title: "Senior Software Engineer / Lead"
+      start_year: "2020"
+      end_year: "2022"
+
+  - id: FACT-010
+    category: EMPLOYMENT
+    title: Senior Software Engineer at Quarks TechnoSoft
+    content: "From February 2019 to February 2020, Bankesh was Senior Software Engineer at Quarks TechnoSoft Pvt. Ltd., architecting the AdviceFit digital fitness membership management platform and a residential housing society app."
+    source: "cv.md#quarks-technosoft"
+    keywords: ["quarks technosoft", "advicefit", "housing society", "biometrics", "fitness"]
+    metadata:
+      employer: "Quarks TechnoSoft Pvt. Ltd."
+      title: "Senior Software Engineer"
+      start_year: "2019"
+      end_year: "2020"
+
+  - id: FACT-011
+    category: EMPLOYMENT
+    title: Senior Software Engineer at Triazine Software
+    content: "From 2013 to 2018, Bankesh worked at Triazine Software Pvt. Ltd. delivering enterprise and government systems including Ticket-Pro Admin (US Government), Traffic-Pro (CMMI Level 3), Hello Tax ITR platform, Domino's Pizza mobile app, and Rajasthan Government Aadhaar biometrics apps."
+    source: "cv.md#triazine-software"
+    keywords: ["triazine software", "ticket-pro", "traffic-pro", "hello tax", "dominos pizza", "rajasthan govt", "aadhaar"]
+    metadata:
+      employer: "Triazine Software Pvt. Ltd."
+      title: "Senior Software Engineer"
+      start_year: "2013"
+      end_year: "2018"
+
+  - id: FACT-012
+    category: EMPLOYMENT
+    title: Early Career at SpearHead / Triazine
+    content: "Bankesh began his career as an Android Developer at SpearHead / Triazine Software Solutions Pvt. Ltd. from 2013 to 2015, delivering over 20 native Android applications across education, news, and entertainment."
+    source: "cv.md#spearhead"
+    keywords: ["spearhead", "android developer", "early career", "2013-2015", "20+ apps"]
+    metadata:
+      employer: "SpearHead / Triazine Software Solutions Pvt. Ltd."
+      title: "Android Developer"
+      start_year: "2013"
+      end_year: "2015"
+
+  - id: FACT-013
+    category: AI_ENGINEERING
+    title: Offline AI Agents and Local LLMs
+    content: "Bankesh builds privacy-first offline AI agents and automated workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker, focusing on agentic development and mobile/backend AI integration."
+    source: "cv.md#key-highlights & portfolio.md#ai"
+    keywords: ["offline ai agents", "ollama", "qwen", "qwen 3 8b", "n8n", "docker", "local llms", "agentic"]
+    metadata:
+      tech: "Ollama, Qwen 3 8B, N8n, Docker"
+
+  - id: FACT-014
+    category: LEADERSHIP
+    title: Engineering Team Leadership and Scope
+    content: "Bankesh has 13+ years of enterprise experience delivering 30+ production applications across 8+ industry domains, leading cross-functional engineering teams of up to 22 engineers with Agile sprint planning, CMMI Level 5 governance, and stakeholder collaboration."
+    source: "cv.md#professional-summary"
+    keywords: ["team leadership", "22 engineers", "13+ years", "30+ apps", "8+ domains", "cmmi level 5", "agile"]
+    metadata:
+      team_size: "up to 22 engineers"
+      experience: "13+ years"
+      apps_delivered: "30+ apps"
+
+  - id: FACT-015
+    category: EDUCATION
+    title: Bachelor of Technology in Information Technology
+    content: "Bankesh completed his B.Tech in Information Technology between 2009 and 2013, graduating with an aggregate score of 80%."
+    source: "cv.md#education"
+    keywords: ["education", "b.tech", "information technology", "2009-2013", "80%"]
+    metadata:
+      degree: "B.Tech Information Technology"
+      years: "2009-2013"
+      aggregate: "80%"
+
+  - id: FACT-016
+    category: CERTIFICATION
+    title: IIT Delhi Internet of Things (IoT) Certification
+    content: "Bankesh earned a professional certification in Internet of Things (IoT) from the Indian Institute of Technology (IIT), Delhi in 2018."
+    source: "cv.md#certifications"
+    keywords: ["certification", "iit delhi", "iot", "internet of things", "2018"]
+    metadata:
+      institution: "Indian Institute of Technology (IIT), Delhi"
+      certification: "Internet of Things (IoT)"
+      year: "2018"
+
+  - id: FACT-017
+    category: PUBLISHED_APPS
+    title: Published Applications on App Stores
+    content: "Bankesh has architected and delivered applications published on the Google Play Store (Domino's Pizza, AdviceFit, ZoomCar, eMitra Payment, Rajasthan Sampark, Rajdhara Survey) and Apple App Store (IGL Connect, AdviceFit iOS, Domino's Pizza iOS)."
+    source: "cv.md#published-apps"
+    keywords: ["published apps", "play store", "app store", "dominos pizza", "zoomcar", "advicefit", "igl connect"]
+    metadata:
+      google_play: ["Domino's Pizza", "AdviceFit", "ZoomCar", "eMitra Payment", "Rajasthan Sampark", "Rajdhara Survey"]
+      app_store: ["IGL Connect", "AdviceFit iOS", "Domino's Pizza iOS"]
+
+  - id: FACT-018
+    category: CONTACT
+    title: Professional Contact Information
+    content: "Bankesh Kumar is located in Varthur, Bangalore - 560037, India. He can be reached via email at bankeshkumar90@gmail.com, phone at +91-9560228486, LinkedIn at linkedin.com/in/bankesh-k-99968753, and GitHub at github.com/bankeshkumar90."
+    source: "cv.md#header"
+    keywords: ["contact", "email", "phone", "location", "bangalore", "linkedin", "github"]
+    metadata:
+      email: "bankeshkumar90@gmail.com"
+      phone: "+91-9560228486"
+      location: "Varthur, Bangalore - 560037"
+      github: "github.com/bankeshkumar90"
+      linkedin: "linkedin.com/in/bankesh-k-99968753"
+
+  - id: FACT-019
+    category: STALE_CONFLICT
+    title: Career Transition from ZoomCar to Wipro
+    content: "Bankesh transitioned from his role as Lead Engineer / Architect at ZoomCar India Pvt. Ltd. (Nov 2023 - Mar 2024) to Technical Lead at Wipro in June 2024, maintaining continuous focus on scalable platform architecture."
+    source: "cv.md#work-experience"
+    keywords: ["transition", "zoomcar to wipro", "timeline", "march 2024", "june 2024"]
+    metadata:
+      transition: "ZoomCar (ended March 2024) -> Wipro (started June 2024)"
+
+  - id: FACT-020
+    category: REDACTED_SYNTHETIC
+    title: Client Confidentiality and Enterprise Scope
+    content: "Specific proprietary client financial metrics and internal corporate systems for partner accounts are kept strictly within enterprise NDA boundaries; public case studies reference verified published platform details (CabCharge, Aviva, Domino's Pizza, Zoom One)."
+    source: "cv.md#professional-summary"
+    keywords: ["confidentiality", "nda", "enterprise clients", "verified platform details"]
+    metadata:
+      type: "Confidentiality boundary"
+
+  - id: FACT-021
+    category: SKILLS
+    title: Mobile Platforms and Architectural Specialization
+    content: "Over his 13+ years of experience, Bankesh specializes in Mobile Platforms (React Native, Android SDK, iOS SDK, Kotlin, Swift, Kotlin Multiplatform, Jetpack Compose) and modern Architectures (Clean Architecture, MVVM, MVI, HLD & LLD Design, Microservices)."
+    source: "cv.md#technical-skills"
+    keywords: ["mobile platforms", "architectures", "react native", "kotlin", "swift", "clean architecture", "mvvm", "mvi", "13+ years"]
+    metadata:
+      platforms: "React Native, Android, iOS, Kotlin Multiplatform"
+      architectures: "Clean Architecture, MVVM, MVI, HLD, LLD"
