@@ -1,12 +1,12 @@
 {
-  "timestamp": "Tue Nov 24 13:30:50 IST 2026",
+  "timestamp": "Tue Nov 24 14:24:03 IST 2026",
   "total_cases": 25,
   "answer_correctness_pct": 100.00,
   "retrieval_recall_pct": 100.00,
   "refusal_correctness_pct": 100.00,
   "hallucination_rate_pct": 0.00,
-  "latency_p50_ms": 14,
-  "latency_p95_ms": 21,
+  "latency_p50_ms": 16,
+  "latency_p95_ms": 25,
   "cases": [
     {
       "id": "EVAL-01",
@@ -14,7 +14,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 179
+      "latency_ms": 220
     },
     {
       "id": "EVAL-02",
@@ -22,7 +22,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 18
+      "latency_ms": 25
     },
     {
       "id": "EVAL-03",
@@ -30,7 +30,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 14
+      "latency_ms": 18
     },
     {
       "id": "EVAL-04",
@@ -46,7 +46,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 14
+      "latency_ms": 16
     },
     {
       "id": "EVAL-06",
@@ -54,7 +54,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 14
+      "latency_ms": 16
     },
     {
       "id": "EVAL-07",
@@ -62,7 +62,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 15
+      "latency_ms": 16
     },
     {
       "id": "EVAL-08",
@@ -70,7 +70,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 14
+      "latency_ms": 22
     },
     {
       "id": "EVAL-09",
@@ -78,7 +78,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 19
+      "latency_ms": 20
     },
     {
       "id": "EVAL-10",
@@ -94,7 +94,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 21
+      "latency_ms": 15
     },
     {
       "id": "EVAL-12",
@@ -102,7 +102,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 15
+      "latency_ms": 16
     },
     {
       "id": "EVAL-13",
@@ -110,7 +110,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 14
+      "latency_ms": 21
     },
     {
       "id": "EVAL-14",
@@ -118,7 +118,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 13
+      "latency_ms": 25
     },
     {
       "id": "EVAL-15",
@@ -126,7 +126,7 @@
       "passed": true,
       "status": "SUCCESS",
       "mode": "FALLBACK_EXTRACTIVE",
-      "latency_ms": 15
+      "latency_ms": 18
     },
     {
       "id": "EVAL-16",
@@ -134,7 +134,7 @@
       "passed": true,
       "status": "REFUSED_UNANSWERABLE",
       "mode": "ROUTER_DETERMINISTIC_REFUSAL",
-      "latency_ms": 1
+      "latency_ms": 0
     },
     {
       "id": "EVAL-17",

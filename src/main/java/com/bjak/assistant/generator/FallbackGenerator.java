@@ -24,7 +24,16 @@ public class FallbackGenerator {
         if (retrievedFacts == null || retrievedFacts.isEmpty() || !confident) {
             result.setStatus(QueryResult.Status.REFUSED_UNANSWERABLE);
             result.setExecutionMode("FALLBACK_DETERMINISTIC_REFUSAL");
-            result.setAnswer("I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+
+            String prompt;
+            if (isGreeting(query)) {
+                prompt = "Hello! Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering leadership.";
+            } else {
+                prompt = "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.";
+            }
+
+            result.setAnswer(prompt + "\n\n" +
+                    "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
                     "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, " +
                     "speculate, or fabricate qualifications, employers, or metrics.");
             result.addAudit("Fallback: Low retrieval confidence or empty facts -> emitted clean deterministic refusal.");
@@ -102,5 +111,12 @@ public class FallbackGenerator {
                lower.equals("bankesh kumar") ||
                (lower.contains("about") && lower.contains("bankesh") && lower.length() < 35) ||
                (lower.contains("summary") && lower.contains("bankesh") && lower.length() < 35);
+    }
+
+    private boolean isGreeting(String query) {
+        if (query == null) return false;
+        String lower = query.toLowerCase().trim();
+        lower = lower.replaceAll("[!.,?]+$", "").trim();
+        return lower.matches("(?i)^(hi|hello|hey|greetings|howdy|hola|yo|hiya|good\\s+(morning|afternoon|evening|day))(\\s+(there|bankesh|assistant|ai|kumar))?$");
     }
 }

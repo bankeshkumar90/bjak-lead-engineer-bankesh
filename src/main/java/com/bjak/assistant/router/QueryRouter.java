@@ -78,10 +78,20 @@ public class QueryRouter {
             }
         }
 
+        // 1b. Check pure greetings ("Hi", "Hello", etc.)
+        if (isGreeting(trimmed)) {
+            return new RoutingDecision(false, QueryResult.Status.REFUSED_UNANSWERABLE,
+                    "Hello! Please ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering leadership.\n\n" +
+                    "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+                    "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, " +
+                    "speculate, or fabricate qualifications, employers, or metrics.");
+        }
+
         // 2. Check unanswerable private/undocumented queries
         for (Pattern p : UNANSWERABLE_PRIVATE_PATTERNS) {
             if (p.matcher(trimmed).find()) {
                 return new RoutingDecision(false, QueryResult.Status.REFUSED_UNANSWERABLE,
+                        "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.\n\n" +
                         "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
                         "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, " +
                         "speculate, or fabricate qualifications, employers, salary, or personal metrics.");
@@ -100,5 +110,12 @@ public class QueryRouter {
 
         // 4. Allowed into retrieval pipeline
         return new RoutingDecision(true, QueryResult.Status.SUCCESS, null);
+    }
+
+    private static boolean isGreeting(String query) {
+        if (query == null) return false;
+        String lower = query.toLowerCase().trim();
+        lower = lower.replaceAll("[!.,?]+$", "").trim();
+        return lower.matches("(?i)^(hi|hello|hey|greetings|howdy|hola|yo|hiya|good\\s+(morning|afternoon|evening|day))(\\s+(there|bankesh|assistant|ai|kumar))?$");
     }
 }
