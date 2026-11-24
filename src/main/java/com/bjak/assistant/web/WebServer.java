@@ -207,6 +207,12 @@ public class WebServer {
     }
 
     private static String getHtmlContent() {
+        try {
+            java.nio.file.Path p = java.nio.file.Path.of("index.html");
+            if (java.nio.file.Files.exists(p)) {
+                return java.nio.file.Files.readString(p);
+            }
+        } catch (Exception ignored) {}
         return "<!DOCTYPE html>\n" +
 "<html lang=\"en\">\n" +
 "<head>\n" +

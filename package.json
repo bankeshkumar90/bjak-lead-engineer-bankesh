@@ -1,0 +1,9 @@
+{
+  "name": "bjak-lead-engineer-bankesh",
+  "version": "1.0.0",
+  "description": "Bankesh Kumar — Grounded AI Career Assistant (Vercel & Java)",
+  "main": "api/ask.js",
+  "scripts": {
+    "start": "node -e 'console.log(\"Vercel ready\")'"
+  }
+}

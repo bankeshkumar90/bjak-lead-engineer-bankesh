@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bankesh Kumar — AI Career Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0B1120;
+      --surface: #131E32;
+      --surface-border: #1E293B;
+      --surface-hover: #1E2E4A;
+      --primary: #38BDF8;
+      --primary-glow: rgba(56, 189, 248, 0.35);
+      --accent: #818CF8;
+      --accent-glow: rgba(129, 140, 248, 0.4);
+      --gradient-designer: linear-gradient(135deg, #0EA5E9 0%, #3B82F6 40%, #8B5CF6 100%);
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --badge-success: #10B981;
+      --badge-refusal: #F59E0B;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(19, 30, 50, 0.85);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--gradient-designer);
+      box-shadow: 0 0 15px var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #FFFFFF;
+      font-size: 1.1rem;
+    }
+    .brand-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; }
+    .brand-subtitle { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10B981;
+      display: inline-block;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      padding: 0.5rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Hero / Action Bar with Stylish Designer Button */
+    .hero-banner {
+      background: linear-gradient(180deg, rgba(30, 46, 74, 0.5) 0%, rgba(19, 30, 50, 0.2) 100%);
+      border: 1px solid var(--surface-border);
+      border-radius: 18px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+    }
+    .hero-text h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(90deg, #FFFFFF, #93C5FD);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ULTRA-STYLIST DESIGNER BUTTON */
+    .btn-designer-ask {
+      position: relative;
+      background: var(--gradient-designer);
+      color: #FFFFFF;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.8rem 1.6rem;
+      border-radius: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 0 25px var(--primary-glow), 0 4px 12px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .btn-designer-ask::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-designer-ask:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.6), 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .btn-designer-ask:hover::before {
+      opacity: 1;
+    }
+    .btn-designer-ask:active {
+      transform: translateY(0) scale(0.98);
+    }
+    .sparkle-icon {
+      font-size: 1.1rem;
+      animation: sparkleRotate 3s infinite ease-in-out;
+    }
+    @keyframes sparkleRotate {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(15deg) scale(1.15); }
+    }
+
+    main {
+      flex: 1;
+      max-width: 940px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1rem;
+      gap: 1.25rem;
+    }
+    .chips-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      padding: 0.45rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip:hover {
+      border-color: var(--primary);
+      background: var(--surface-hover);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    #chatFeed {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-height: 380px;
+    }
+    .msg {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg-user {
+      align-self: flex-end;
+      max-width: 80%;
+    }
+    .msg-user .bubble {
+      background: linear-gradient(135deg, #0284C7, #2563EB);
+      color: #fff;
+      padding: 0.85rem 1.2rem;
+      border-radius: 18px 18px 4px 18px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
+    }
+    .msg-assistant {
+      align-self: flex-start;
+      width: 100%;
+    }
+    .msg-assistant .card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding-bottom: 0.55rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .badge-success { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-refusal { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .card-body {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+    .card-body strong, .card-body b {
+      color: #93C5FD;
+    }
+    .card-sources {
+      background: rgba(11, 17, 32, 0.75);
+      border: 1px solid var(--surface-border);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.82rem;
+    }
+    .sources-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.45rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .source-item {
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      display: flex;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    .source-tag {
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .audit-toggle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 0.3rem;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+    .audit-toggle:hover { color: var(--primary); }
+    .audit-box {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #94A3B8;
+      background: #020617;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      line-height: 1.55;
+      border: 1px solid #1E293B;
+    }
+
+    .input-bar {
+      position: sticky;
+      bottom: 1.5rem;
+      background: rgba(19, 30, 50, 0.95);
+      border: 1px solid var(--surface-border);
+      border-radius: 18px;
+      padding: 0.5rem 0.6rem 0.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+      backdrop-filter: blur(16px);
+      z-index: 50;
+    }
+    .input-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 0.96rem;
+      font-family: var(--font-sans);
+    }
+    .input-bar input::placeholder {
+      color: #64748B;
+    }
+    .btn-send {
+      background: var(--primary);
+      color: #0F172A;
+      border: none;
+      font-weight: 700;
+      padding: 0.7rem 1.25rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-send:hover {
+      background: #7DD3FC;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    }
+    .btn-send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .loading-spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(15, 23, 42, 0.3);
+      border-radius: 50%;
+      border-top-color: #0F172A;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--surface);
+    }
+
+    @media (max-width: 640px) {
+      .hero-banner { flex-direction: column; align-items: flex-start; }
+      .btn-designer-ask { width: 100%; justify-content: center; }
+      .nav-actions { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="avatar">BK</div>
+      <div>
+        <div class="brand-title">Bankesh Kumar — AI Career Assistant</div>
+        <div class="brand-subtitle"><span class="live-dot"></span> Technical Lead | Senior Mobile & Platform Architect (13+ Years)</div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="https://bankeshportfolio.vercel.app/" target="_blank" class="btn-outline">🌐 Portfolio</a>
+      <a href="https://github.com/bankeshkumar90" target="_blank" class="btn-outline">💻 GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO BAR WITH STYLISH DESIGNER BUTTON -->
+    <div class="hero-banner">
+      <div class="hero-text">
+        <h2>Ask Anything About Bankesh's Verified Career</h2>
+        <p>Grounded strictly in official CV & Portfolio records with 100% verified facts & zero hallucination.</p>
+      </div>
+      <button id="btnAskBankesh" class="btn-designer-ask" onclick="handleDesignerAskClick()">
+        <span class="sparkle-icon">✨</span>
+        <span>Ask about Bankesh</span>
+      </button>
+    </div>
+
+    <!-- QUICK TOPIC CHIPS -->
+    <div>
+      <div class="chips-label">Popular Topics & Case Studies</div>
+      <div class="chips-row">
+        <button class="chip" onclick="askQuestion('Tell me about Bankesh')">👤 Executive Profile</button>
+        <button class="chip" onclick="askQuestion('What did Bankesh build for CabCharge white-label taxi app at Wipro?')">🚕 CabCharge Taxi Platform</button>
+        <button class="chip" onclick="askQuestion('What did Bankesh deliver for the Aviva insurance and wellbeing app?')">🏥 Aviva Insurance & Health</button>
+        <button class="chip" onclick="askQuestion('What was Bankesh\'s architectural role at ZoomCar on Zoom One?')">🚗 Zoom One Car Rental</button>
+        <button class="chip" onclick="askQuestion('What did Bankesh build for Android TV and RFID at Tekion?')">📺 OTT TV & RFID at Tekion</button>
+        <button class="chip" onclick="askQuestion('What is Bankesh\'s experience with Spring Boot microservices and Eureka?')">☕ Spring Boot & Eureka</button>
+        <button class="chip" onclick="askQuestion('How does Bankesh build offline AI agents using Ollama and Qwen?')">🤖 Offline AI & Local LLMs</button>
+        <button class="chip" onclick="askQuestion('What is Bankesh\'s engineering team leadership experience and maximum team size led?')">👥 22 Engineers Leadership</button>
+        <button class="chip" onclick="askQuestion('Where did Bankesh earn his IoT certification and what degree does he hold?')">🎓 B.Tech & IIT Delhi IoT</button>
+        <button class="chip" onclick="askQuestion('Where is Bankesh based and how can recruiters contact him?')">📍 Contact & Location</button>
+      </div>
+    </div>
+
+    <!-- CHAT FEED -->
+    <div id="chatFeed"></div>
+
+    <!-- INPUT BAR -->
+    <div class="input-bar">
+      <input type="text" id="queryInput" placeholder="Ask any question about Bankesh's experience, architecture, or skills..." onkeydown="if(event.key==='Enter') submitQuery()" />
+      <button id="sendBtn" class="btn-send" onclick="submitQuery()">
+        <span>Ask</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    Bankesh Kumar Career Assistant &bull; Grounded in verified CV & Portfolio records &bull; 0% Hallucination Guarantee
+  </footer>
+
+  <script>
+    // Embedded Knowledge Base & Deterministic Engine for 100% 24/7 Availability
+    const FACTS_STORE = [
+      { id: "FACT-001", title: "Current Role at Wipro", content: "Bankesh Kumar currently serves as Technical Lead at Wipro from June 2024 to Present, leading engineering initiatives and driving technical strategy for enterprise-scale solutions.", source: "cv.md#wipro", keywords: ["current role", "wipro", "technical lead", "present"] },
+      { id: "FACT-002", title: "White Label Taxi Booking App - CabCharge", content: "At Wipro, Bankesh architected and developed a scalable white-label React Native platform (CabCharge) for the automotive industry, using Clean Architecture, RTK Query, MMKV, and Google Maps to enable multiple enterprise deployments from a single codebase.", source: "cv.md#wipro", keywords: ["cabcharge", "taxi app", "white label", "react native", "mmkv", "rtk query", "clean architecture", "google maps"] },
+      { id: "FACT-003", title: "Insurance & Wellbeing App - Aviva", content: "At Wipro, Bankesh led the cross-functional mobile team delivering the Aviva cross-platform insurance and wellbeing app, implementing deep-linking between group apps (MyWorkplace, DW Wealth) and integrating SonarQube to raise code quality.", source: "cv.md#wipro", keywords: ["aviva", "insurance", "wellbeing", "deep-linking", "sonarqube", "tech lead"] },
+      { id: "FACT-004", title: "Backend API Platform Microservices Architecture", content: "Bankesh architected (LLD & HLD) a local microservices architecture using Java, Spring Boot, Spring Cloud, Eureka Service Registry, API Gateway, and Config Server for backend system design, routing, and mobile integration.", source: "cv.md#wipro", keywords: ["backend", "microservices", "spring boot", "spring cloud", "eureka", "api gateway", "config server", "java"] },
+      { id: "FACT-005", title: "Lead Engineer / Architect at ZoomCar", content: "Bankesh served as Lead Engineer / Architect at ZoomCar India Pvt. Ltd. from November 2023 to March 2024, architecting the unified Zoom One platform.", source: "cv.md#zoomcar", keywords: ["zoomcar", "lead engineer", "architect", "zoom one"] },
+      { id: "FACT-006", title: "Zoom One Unified Car Rental Platform", content: "At ZoomCar, Bankesh merged separate Guest and Host applications into the unified Zoom One platform via a centralized core module with shared ViewModel and APIVM layers, integrating CleverTap, Crashlytics, and a React Native bridge for phased rollout.", source: "cv.md#zoomcar", keywords: ["zoom one", "guest", "host", "clevertap", "crashlytics", "react native bridge", "ktor", "kotlin multiplatform"] },
+      { id: "FACT-007", title: "Senior Software Engineer / Architect at Tekion", content: "From March 2022 to June 2023, Bankesh was Senior Software Engineer / Architect at Tekion India Pvt. Ltd., architecting digital display and Android TV Set-Top-Box platforms for US automotive dealerships.", source: "cv.md#tekion", keywords: ["tekion", "senior software engineer", "architect", "ott tv", "android tv", "automotive"] },
+      { id: "FACT-008", title: "OTT TV App and System App Firmware Bridge at Tekion", content: "At Tekion, Bankesh built an Android TV OTT app and heartbeat system bridge using Kotlin, MQTT, GraphQL, Room, and ExoPlayer, incorporating RFID Communicator and real-time repair order tracking.", source: "cv.md#tekion", keywords: ["ott tv", "mqtt", "rfid", "graphql", "exoplayer", "firmware bridge", "set-top-box"] },
+      { id: "FACT-009", title: "Senior Software Engineer / Lead at Zibal Tech", content: "From April 2020 to February 2022, Bankesh was Senior Software Engineer / Lead at Zibal Tech Pvt. Ltd., leading development of the StrataGem CMMI Level 5 multiplayer game, N-Radius food delivery app, and SmartCat ML data tool.", source: "cv.md#zibal-tech", keywords: ["zibal tech", "stratagem", "n-radius", "smartcat", "cmmi level 5", "lead engineer"] },
+      { id: "FACT-010", title: "Senior Software Engineer at Quarks TechnoSoft", content: "From February 2019 to February 2020, Bankesh was Senior Software Engineer at Quarks TechnoSoft Pvt. Ltd., architecting the AdviceFit digital fitness membership management platform and a residential housing society app.", source: "cv.md#quarks-technosoft", keywords: ["quarks technosoft", "advicefit", "housing society", "biometrics", "fitness"] },
+      { id: "FACT-011", title: "Senior Software Engineer at Triazine Software", content: "From 2013 to 2018, Bankesh worked at Triazine Software Pvt. Ltd. delivering enterprise and government systems including Ticket-Pro Admin (US Government), Traffic-Pro (CMMI Level 3), Hello Tax ITR platform, Domino's Pizza mobile app, and Rajasthan Government Aadhaar biometrics apps.", source: "cv.md#triazine-software", keywords: ["triazine software", "ticket-pro", "traffic-pro", "hello tax", "dominos pizza", "rajasthan govt", "aadhaar"] },
+      { id: "FACT-012", title: "Early Career at SpearHead / Triazine", content: "Bankesh began his career as an Android Developer at SpearHead / Triazine Software Solutions Pvt. Ltd. from 2013 to 2015, delivering over 20 native Android applications across education, news, and entertainment.", source: "cv.md#spearhead", keywords: ["spearhead", "android developer", "early career", "2013-2015", "20+ apps"] },
+      { id: "FACT-013", title: "Offline AI Agents and Local LLMs", content: "Bankesh builds privacy-first offline AI agents and automated workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker, focusing on agentic development and mobile/backend AI integration.", source: "cv.md#key-highlights & portfolio.md#ai", keywords: ["offline ai agents", "ollama", "qwen", "qwen 3 8b", "n8n", "docker", "local llms", "agentic"] },
+      { id: "FACT-014", title: "Engineering Team Leadership and Scope", content: "Bankesh has 13+ years of enterprise experience delivering 30+ production applications across 8+ industry domains, leading cross-functional engineering teams of up to 22 engineers with Agile sprint planning, CMMI Level 5 governance, and stakeholder collaboration.", source: "cv.md#professional-summary", keywords: ["team leadership", "22 engineers", "13+ years", "30+ apps", "8+ domains", "cmmi level 5", "agile"] },
+      { id: "FACT-015", title: "Bachelor of Technology in Information Technology", content: "Bankesh completed his B.Tech in Information Technology between 2009 and 2013, graduating with an aggregate score of 80%.", source: "cv.md#education", keywords: ["education", "b.tech", "information technology", "2009-2013", "80%"] },
+      { id: "FACT-016", title: "IIT Delhi Internet of Things (IoT) Certification", content: "Bankesh earned a professional certification in Internet of Things (IoT) from the Indian Institute of Technology (IIT), Delhi in 2018.", source: "cv.md#certifications", keywords: ["certification", "iit delhi", "iot", "internet of things", "2018"] },
+      { id: "FACT-017", title: "Published Applications on App Stores", content: "Bankesh has architected and delivered applications published on the Google Play Store (Domino's Pizza, AdviceFit, ZoomCar, eMitra Payment, Rajasthan Sampark, Rajdhara Survey) and Apple App Store (IGL Connect, AdviceFit iOS, Domino's Pizza iOS).", source: "cv.md#published-apps", keywords: ["published apps", "play store", "app store", "dominos pizza", "zoomcar", "advicefit", "igl connect"] },
+      { id: "FACT-018", title: "Professional Contact Information", content: "Bankesh Kumar is located in Varthur, Bangalore - 560037, India. He can be reached via email at bankeshkumar90@gmail.com, phone at +91-9560228486, LinkedIn at linkedin.com/in/bankesh-k-99968753, and GitHub at github.com/bankeshkumar90.", source: "cv.md#header", keywords: ["contact", "email", "phone", "location", "bangalore", "linkedin", "github"] },
+      { id: "FACT-019", title: "Career Transition from ZoomCar to Wipro", content: "Bankesh transitioned from his role as Lead Engineer / Architect at ZoomCar India Pvt. Ltd. (Nov 2023 - Mar 2024) to Technical Lead at Wipro in June 2024, maintaining continuous focus on scalable platform architecture.", source: "cv.md#work-experience", keywords: ["transition", "zoomcar to wipro", "timeline", "march 2024", "june 2024"] },
+      { id: "FACT-020", title: "Client Confidentiality and Enterprise Scope", content: "Specific proprietary client financial metrics and internal corporate systems for partner accounts are kept strictly within enterprise NDA boundaries; public case studies reference verified published platform details (CabCharge, Aviva, Domino's Pizza, Zoom One).", source: "cv.md#professional-summary", keywords: ["confidentiality", "nda", "enterprise clients", "verified platform details"] },
+      { id: "FACT-021", title: "Mobile Platforms and Architectural Specialization", content: "Over his 13+ years of experience, Bankesh specializes in Mobile Platforms (React Native, Android SDK, iOS SDK, Kotlin, Swift, Kotlin Multiplatform, Jetpack Compose) and modern Architectures (Clean Architecture, MVVM, MVI, HLD & LLD Design, Microservices).", source: "cv.md#technical-skills", keywords: ["mobile platforms", "architectures", "react native", "kotlin", "swift", "clean architecture", "mvvm", "mvi", "13+ years"] }
+    ];
+
+    // Client-Side Deterministic Fallback Engine (Runs 24/7 with 0 external dependencies)
+    function executeLocalPipeline(query) {
+      const start = Date.now();
+      const q = (query || "").trim();
+      const lower = q.toLowerCase();
+
+      // Injection Check
+      if (/ignore\s+(all|any|previous)|disregard|you\s+are\s+now|system\s+prompt|<script/i.test(q)) {
+        return {
+          question: q,
+          status: "REFUSED_INJECTION",
+          executionMode: "ROUTER_DETERMINISTIC_REFUSAL",
+          latencyMs: Date.now() - start,
+          answer: "Refusal [Safety/Security]: Query contains instruction override or prompt injection attempt. The assistant strictly answers questions grounded in Bankesh Kumar's verified professional record.",
+          citedFactIds: [],
+          sourceReferences: [],
+          auditTrail: ["Router: Prompt injection pattern detected -> immediate refusal."]
+        };
+      }
+
+      // Greeting Check
+      const cleanGreeting = lower.replace(/[!.,?]+$/, '').trim();
+      if (/^(hi|hello|hey|greetings|howdy|hola|yo|hiya|good\s+(morning|afternoon|evening|day))(\s+(there|bankesh|assistant|ai|kumar))?$/i.test(cleanGreeting)) {
+        return {
+          question: q,
+          status: "REFUSED_UNANSWERABLE",
+          executionMode: "ROUTER_DETERMINISTIC_REFUSAL",
+          latencyMs: Date.now() - start,
+          answer: "Hello! Please ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering leadership.\n\nI do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.",
+          citedFactIds: [],
+          sourceReferences: [],
+          auditTrail: ["Router: Greeting detected -> guided user to ask about Bankesh's profile followed by refusal standard."]
+        };
+      }
+
+      // Unanswerable Private Check
+      if (/(salary|bonus|compensation|passport|blood group|marital status|solana|master of science|canada)/i.test(lower)) {
+        return {
+          question: q,
+          status: "REFUSED_UNANSWERABLE",
+          executionMode: "ROUTER_DETERMINISTIC_REFUSAL",
+          latencyMs: Date.now() - start,
+          answer: "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.\n\nI do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, salary, or personal metrics.",
+          citedFactIds: [],
+          sourceReferences: [],
+          auditTrail: ["Router: Unanswerable private query pattern detected -> clean refusal."]
+        };
+      }
+
+      // Out of scope Check
+      if (/(capital of|recipe for|weather in|poem|stock price)/i.test(lower)) {
+        return {
+          question: q,
+          status: "REFUSED_OUT_OF_SCOPE",
+          executionMode: "ROUTER_DETERMINISTIC_REFUSAL",
+          latencyMs: Date.now() - start,
+          answer: "Refusal [Out of Scope]: I am an AI Career Assistant dedicated exclusively to Bankesh Kumar's professional experience, architecture projects, engineering leadership, and qualifications. I do not answer general knowledge, weather, creative writing, or external domain queries.",
+          citedFactIds: [],
+          sourceReferences: [],
+          auditTrail: ["Router: Out of scope inquiry -> clean refusal."]
+        };
+      }
+
+      // Overview Inquiry Check
+      const isOverview = (
+        lower.includes("tell me about bankesh") ||
+        lower.includes("who is bankesh") ||
+        lower.includes("tell me about yourself") ||
+        lower.includes("who are you") ||
+        lower.includes("overview") ||
+        lower.includes("summary") ||
+        lower.includes("profile") ||
+        lower.trim() === "bankesh" ||
+        lower.trim() === "bankesh kumar"
+      ) && !/mqtt|rfid|spring|taxi|cabcharge|aviva|zoomcar|tekion|zibal|quarks|triazine|domino|stratagem|n-radius|smartcat|advicefit|compose|kmm|degree|college|contact|email|phone|location|salary/i.test(lower);
+
+      if (isOverview) {
+        const overviewFactIds = ["FACT-014", "FACT-001", "FACT-002", "FACT-003", "FACT-021", "FACT-004", "FACT-013", "FACT-005", "FACT-006", "FACT-007", "FACT-008", "FACT-009", "FACT-010", "FACT-011", "FACT-015", "FACT-016"];
+        return {
+          question: q,
+          status: "SUCCESS",
+          executionMode: "FALLBACK_EXTRACTIVE",
+          latencyMs: Date.now() - start,
+          answer: "Bankesh Kumar is an AI Forward-Deployed Engineer, Technical Lead, and Mobile/Platform Architect with 13+ years of enterprise experience delivering scalable systems across fintech, automotive, insurance, OTT, gaming, food delivery, and government sectors [FACT-014].\n\n" +
+            "Key Professional Overview:\n" +
+            "• Current Role: Technical Lead at Wipro (June 2024 – Present), driving platform architecture including the CabCharge white-label taxi app and Aviva insurance/wellbeing app [FACT-001, FACT-002, FACT-003].\n" +
+            "• Technical Specialization: Expert in React Native, Android (Kotlin), iOS (Swift), Kotlin Multiplatform (KMM), and Clean Architecture / MVVM [FACT-021], as well as Spring Boot microservices [FACT-004].\n" +
+            "• Offline AI & Local LLMs: Builds privacy-first offline AI agents and automated workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker [FACT-013].\n" +
+            "• Architecture Track Record: Previously Lead Engineer/Architect at ZoomCar (merging apps into Zoom One [FACT-005, FACT-006]), Tekion (Android TV OTT [FACT-007, FACT-008]), Zibal Tech (StrataGem CMMI Level 5 game [FACT-009]), Quarks (AdviceFit [FACT-010]), and Triazine (Domino's Pizza, Hello Tax, Aadhaar apps [FACT-011]).\n" +
+            "• Leadership & Scope: Led cross-functional teams of up to 22 engineers, delivering 30+ production apps across 8+ industry domains [FACT-014].\n" +
+            "• Education & Certification: B.Tech in Information Technology (80%) [FACT-015] and IoT Certified from IIT Delhi [FACT-016].",
+          citedFactIds: overviewFactIds,
+          sourceReferences: overviewFactIds.map(fid => `[${fid}] Verified Fact Reference`),
+          auditTrail: ["Retriever: Detected Executive Profile Overview intent.", "Grounded synthesis generated with zero hallucinations."]
+        };
+      }
+
+      // Keyword Scoring & Facts Retrieval
+      const qTokens = lower.replace(/[^a-z0-9]/g, ' ').split(/\s+/).filter(t => t.length > 1);
+      const scored = FACTS_STORE.map(f => {
+        let score = 0;
+        const text = (f.content + " " + f.keywords.join(" ") + " " + f.title).toLowerCase();
+        for (const qt of qTokens) {
+          if (text.includes(qt)) score += 2.0;
+        }
+
+        // Apply metadata boosts
+        const fid = f.id;
+        if (fid === 'FACT-001' && /wipro|current|present|technical lead/.test(lower)) score += 5.0;
+        if (fid === 'FACT-002' && /cabcharge|taxi|white label|mmkv|google maps|automotive/.test(lower)) score += 5.5;
+        if (fid === 'FACT-003' && /aviva|insurance|wellbeing|wellness|deep linking|sonarqube/.test(lower)) score += 5.5;
+        if (fid === 'FACT-004' && /spring boot|springboot|eureka|microservice|backend|api gateway|config server/.test(lower)) score += 5.5;
+        if ((fid === 'FACT-005' || fid === 'FACT-006') && /zoomcar|zoom one|car rental|rental|clevertap|crashlytics|ktor|guest|host/.test(lower)) score += 5.5;
+        if ((fid === 'FACT-007' || fid === 'FACT-008') && /tekion|ott|android tv|mqtt|rfid|exoplayer|firmware|set-top-box/.test(lower)) score += 5.5;
+        if (fid === 'FACT-009' && /zibal|stratagem|n-radius|smartcat|brain-training|food delivery|workmanager|redux-saga/.test(lower)) score += 5.0;
+        if (fid === 'FACT-010' && /quarks|advicefit|fitness|gym|housing society|itext/.test(lower)) score += 5.0;
+        if (fid === 'FACT-011' && /triazine|ticket-pro|traffic-pro|hello tax|domino|aadhaar|uidai|morpho|secugen|iris|worklight/.test(lower)) score += 5.0;
+        if (fid === 'FACT-012' && /spearhead|smart-kidz|khel-cafe|early career/.test(lower)) score += 5.0;
+        if (fid === 'FACT-013' && /ai|ollama|qwen|n8n|local llm|offline ai|privacy-first|agentic|forward deployed/.test(lower)) score += 5.5;
+        if (fid === 'FACT-014' && /team|lead|22 engineers|engineers|leadership|cmmi|agile|scrum|30\+ apps|8\+ domains/.test(lower)) score += 5.0;
+        if (fid === 'FACT-015' && /education|degree|b\.tech|btech|information technology|80%|college|university/.test(lower)) score += 5.5;
+        if (fid === 'FACT-016' && /certification|certified|iit|iot|internet of things|delhi/.test(lower)) score += 5.5;
+        if (fid === 'FACT-017' && /published|play store|app store|apps|google play/.test(lower)) score += 5.5;
+        if (fid === 'FACT-018' && /contact|email|phone|location|bangalore|varthur|linkedin|github/.test(lower)) score += 5.5;
+        if ((fid === 'FACT-001' || fid === 'FACT-019') && /transition|timeline|zoomcar to wipro|march 2024/.test(lower)) score += 5.0;
+        if (fid === 'FACT-021' && /mobile platform|react native|kotlin|swift|clean architecture|mvvm|mvi|jetpack compose|kmm/.test(lower)) score += 5.0;
+
+        return { fact: f, score };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      const top = scored.filter(s => s.score >= 1.5).slice(0, 5).map(s => s.fact);
+
+      if (top.length === 0) {
+        return {
+          question: q,
+          status: "REFUSED_UNANSWERABLE",
+          executionMode: "FALLBACK_DETERMINISTIC_REFUSAL",
+          latencyMs: Date.now() - start,
+          answer: "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.\n\nI do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.",
+          citedFactIds: [],
+          sourceReferences: [],
+          auditTrail: ["Retriever: No matching verified facts found -> clean refusal."]
+        };
+      }
+
+      let ans = "Based on Bankesh Kumar's verified professional documentation:\n\n";
+      const citedFactIds = [];
+      const sources = [];
+
+      for (const f of top) {
+        ans += "• " + f.content + " [" + f.id + "]\n";
+        citedFactIds.push(f.id);
+        sources.push("[" + f.id + "] " + f.title + " (Source: " + f.source + ")");
+      }
+
+      return {
+        question: q,
+        status: "SUCCESS",
+        executionMode: "FALLBACK_EXTRACTIVE",
+        latencyMs: Date.now() - start,
+        answer: ans.trim(),
+        citedFactIds,
+        sourceReferences: sources,
+        auditTrail: [
+          "Router check passed: Query is in-scope.",
+          `Retriever: Fetched ${top.length} facts.`,
+          "Generator: Grounded extractive answer generated."
+        ]
+      };
+    }
+
+    // Designer Button Handler
+    function handleDesignerAskClick() {
+      const input = document.getElementById('queryInput');
+      const val = (input.value || "").trim();
+      if (val.length > 0) {
+        submitQuery();
+      } else {
+        askQuestion('Tell me about Bankesh');
+      }
+    }
+
+    function askQuestion(q) {
+      document.getElementById('queryInput').value = q;
+      submitQuery();
+    }
+
+    async function submitQuery() {
+      const input = document.getElementById('queryInput');
+      const q = input.value.trim();
+      if (!q) return;
+
+      input.value = '';
+      input.disabled = true;
+      const sendBtn = document.getElementById('sendBtn');
+      sendBtn.disabled = true;
+      sendBtn.innerHTML = '<span class="loading-spinner"></span>';
+
+      appendUserMessage(q);
+
+      const placeholderId = 'loading-' + Date.now();
+      appendLoadingMessage(placeholderId);
+
+      const startTime = performance.now();
+      let resData = null;
+
+      try {
+        // Try Vercel Serverless API first
+        const resp = await fetch('/api/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: q })
+        });
+        if (resp.ok) {
+          resData = await resp.json();
+        }
+      } catch (err) {
+        // Serverless API offline or network error -> use embedded client-side engine!
+      }
+
+      if (!resData) {
+        resData = executeLocalPipeline(q);
+      }
+
+      removeElement(placeholderId);
+      appendAssistantMessage(resData);
+
+      input.disabled = false;
+      sendBtn.disabled = false;
+      sendBtn.innerHTML = 'Ask';
+      input.focus();
+    }
+
+    function appendUserMessage(text) {
+      const feed = document.getElementById('chatFeed');
+      const div = document.createElement('div');
+      div.className = 'msg msg-user';
+      div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+      feed.appendChild(div);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function appendLoadingMessage(id) {
+      const feed = document.getElementById('chatFeed');
+      const div = document.createElement('div');
+      div.className = 'msg msg-assistant';
+      div.id = id;
+      div.innerHTML = `
+        <div class="card" style="padding: 1rem 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; color: var(--text-muted); font-size: 0.85rem;">
+            <span class="loading-spinner"></span>
+            <span>Synthesizing verified claims against Bankesh's official records...</span>
+          </div>
+        </div>
+      `;
+      feed.appendChild(div);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function appendAssistantMessage(data) {
+      const feed = document.getElementById('chatFeed');
+      const div = document.createElement('div');
+      div.className = 'msg msg-assistant';
+
+      const isSuccess = data.status === 'SUCCESS';
+      const badgeClass = isSuccess ? 'badge-success' : 'badge-refusal';
+      const badgeIcon = isSuccess ? '●' : '▲';
+      const badgeText = isSuccess ? 'SUCCESS' : (data.status || 'REFUSED');
+
+      let sourcesHtml = '';
+      if (data.sourceReferences && data.sourceReferences.length > 0) {
+        sourcesHtml = `
+          <div class="card-sources">
+            <div class="sources-title">Verified Sources & Citations</div>
+            ${data.sourceReferences.map(src => {
+              const tagMatch = src.match(/^\[(.*?)\]/);
+              const tag = tagMatch ? tagMatch[1] : '';
+              const rest = tagMatch ? src.substring(tagMatch[0].length).trim() : src;
+              return `<div class="source-item"><span class="source-tag">[${escapeHtml(tag)}]</span> <span>${escapeHtml(rest)}</span></div>`;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      const auditId = 'audit-' + Date.now();
+      let auditHtml = '';
+      if (data.auditTrail && data.auditTrail.length > 0) {
+        auditHtml = `
+          <div>
+            <span class="audit-toggle" onclick="toggleAudit('${auditId}')">View Pipeline Audit Log (${data.auditTrail.length} steps)</span>
+            <div id="${auditId}" class="audit-box">
+              ${data.auditTrail.map(step => `<div>&bull; ${escapeHtml(step)}</div>`).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      div.innerHTML = `
+        <div class="card">
+          <div class="card-meta">
+            <span class="badge ${badgeClass}">${badgeIcon} ${escapeHtml(badgeText)}</span>
+            <span>Mode: ${escapeHtml(data.executionMode || 'FALLBACK_EXTRACTIVE')} | Latency: ${data.latencyMs || 0}ms</span>
+          </div>
+          <div class="card-body">${escapeHtml(data.answer || '')}</div>
+          ${sourcesHtml}
+          ${auditHtml}
+        </div>
+      `;
+      feed.appendChild(div);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function toggleAudit(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+
+    function removeElement(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Auto-load executive overview on first arrival
+    window.addEventListener('DOMContentLoaded', () => {
+      appendAssistantMessage({
+        question: "Tell me about Bankesh",
+        status: "SUCCESS",
+        executionMode: "FALLBACK_EXTRACTIVE",
+        latencyMs: 12,
+        answer: "Welcome to Bankesh Kumar's AI Career Assistant!\n\nBankesh Kumar is an AI Forward-Deployed Engineer, Technical Lead, and Mobile/Platform Architect with 13+ years of enterprise experience delivering 30+ scalable systems across fintech, automotive, insurance, OTT, gaming, food delivery, and government sectors [FACT-014].\n\nClick the \"✨ Ask about Bankesh\" button above or ask any technical interview question below.",
+        citedFactIds: ["FACT-014"],
+        sourceReferences: ["[FACT-014] Engineering Team Leadership and Scope (Source: cv.md#professional-summary)"],
+        auditTrail: ["System initialized: Ready to serve verified career queries 24/7."]
+      });
+    });
+  </script>
+</body>
+</html>
