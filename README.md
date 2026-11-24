@@ -12,8 +12,8 @@ The project is designed to be **100% plug-and-play**: it runs on any machine wit
 ### One-Command Execution
 ```bash
 # Clone the repository
-git clone https://github.com/bankeshkumar90/bjak-lead-engineer-bankeshk.git
-cd bjak-lead-engineer-bankeshk
+git clone https://github.com/bankeshkumar90/bjak-lead-engineer-bankesh.git
+cd bjak-lead-engineer-bankesh
 
 # Ask any technical question directly (plug-and-play)
 ./run.sh ask "What is Bankesh's experience with mobile architecture and offline AI?"
@@ -98,7 +98,20 @@ The implementation matches the exact component flow defined in **[CVArchitecture
 
 ---
 
-## 3. Section 1 — Personal Knowledge Layer (25%)
+## 3. Live Interface Result & Verification
+
+Below is a live execution of the Career Assistant Web Interface (`http://localhost:8080`) responding to an interview query (**"number of companies bankesh worked"**), showcasing:
+- **Instant Response & Groundedness:** 164ms latency in `FALLBACK_EXTRACTIVE` mode with 100% verified claims.
+- **Traceable Fact Provenance:** Every claim explicitly cites its supporting atomic Fact ID (`[FACT-014]`, `[FACT-001]`, `[FACT-021]`, `[FACT-013]`, `[FACT-006]`).
+- **Verified Sources & Citations:** Direct mapping to underlying source documentation in `data/cv.md` and portfolio records.
+
+<p align="center">
+  <img src="web_interface.jpg" alt="Career Assistant Web Interface Result" width="850" />
+</p>
+
+---
+
+## 4. Section 1 — Personal Knowledge Layer (25%)
 
 ### Sources & Structure
 All information in the knowledge base is derived directly and exclusively from Bankesh Kumar's verified professional documentation and live portfolio:
@@ -122,7 +135,7 @@ Adding a new source (e.g. GitHub repos, conference talks, LinkedIn posts) requir
 
 ---
 
-## 4. Section 2 — AI System & Back-End Architecture (25%)
+## 5. Section 2 — AI System & Back-End Architecture (25%)
 
 ### Core Pipeline Execution
 1. **Deterministic Router:** Scans incoming query against compiled regex patterns for prompt injection (`ignore previous instructions`, `you are now a pirate`, `reveal system prompt`, `<script>`) and out-of-scope/unanswerable private domains (`salary`, `bonus`, `marital status`, `passport`, `general trivia`). Returns clean, immediate refusal.
@@ -167,7 +180,7 @@ Adding a new source (e.g. GitHub repos, conference talks, LinkedIn posts) requir
 
 ---
 
-## 5. Section 3 — Evaluation, Reliability & Testing (30%)
+## 6. Section 3 — Evaluation, Reliability & Testing (30%)
 
 ### Evaluation Dataset Composition (25 Test Cases)
 The suite (`eval/dataset.json`) contains 25 realistic technical interview questions across all 5 mandatory categories:
@@ -225,7 +238,7 @@ If guarding financial transactions:
 
 ---
 
-## 6. Section 4 — User Experience (10%)
+## 7. Section 4 — User Experience (10%)
 
 The CLI interface is built to provide crystal-clear transparency:
 - **Sources Visible on Every Answer:** Every claim includes its bracketed Fact ID (e.g. `[FACT-002]`), followed by a dedicated `SOURCES & CITATIONS` section listing the title and file line location.
@@ -234,7 +247,7 @@ The CLI interface is built to provide crystal-clear transparency:
 
 ---
 
-## 7. Section 5 — Engineering Leadership, Decisions & AI Use (10%)
+## 8. Section 5 — Engineering Leadership, Decisions & AI Use (10%)
 
 ### Architecture Decision Records (ADRs)
 1. **ADR-01: Zero-Dependency Embedded Engine vs. External Vector DB**
@@ -268,13 +281,14 @@ The CLI interface is built to provide crystal-clear transparency:
 
 ---
 
-## 8. Repository Structure & Configuration
+## 9. Repository Structure & Configuration
 
 ```
 bjak-lead-engineer-bankeshk/
 ├── README.md                 # Complete system documentation
 ├── CVArchitecture.jpg        # Architectural specification diagram
-├── run.sh                    # One-command runner (compile, ask, eval, chat)
+├── web_interface.jpg         # Live web interface execution result
+├── run.sh                    # One-command runner (compile, ask, eval, chat, web)
 ├── pom.xml                   # Standard Maven build configuration
 ├── .env.example              # Documented environment variables
 ├── .env                      # Local configuration
@@ -295,6 +309,7 @@ bjak-lead-engineer-bankeshk/
     ├── retriever/            # BM25Retriever (BM25 + metadata filters)
     ├── generator/            # LLMGenerator (Ollama) & FallbackGenerator
     ├── verifier/             # ClaimVerifier (entity & citation validation)
+    ├── web/                  # WebServer (HTTP server & glassmorphic web UI)
     └── pipeline/             # CareerAssistantPipeline orchestrator
 ```
 
