@@ -19,7 +19,13 @@ cd bjak-lead-engineer-bankeshk
 ./run.sh ask "What is Bankesh's experience with mobile architecture and offline AI?"
 ```
 
-### Interactive Interview Mode
+### Web Browser Interface (Interactive UI)
+```bash
+./run.sh web 8080
+# Open http://localhost:8080 in your browser
+```
+
+### Interactive Interview Mode (CLI)
 ```bash
 ./run.sh interactive
 ```

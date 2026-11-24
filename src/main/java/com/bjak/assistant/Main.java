@@ -41,6 +41,21 @@ public class Main {
                     runInteractive(pipeline);
                     break;
 
+                case "web":
+                case "server":
+                case "ui":
+                    int port = 8080;
+                    if (args.length > 1) {
+                        try {
+                            port = Integer.parseInt(args[1]);
+                        } catch (NumberFormatException ignored) {}
+                    }
+                    com.bjak.assistant.web.WebServer webServer = new com.bjak.assistant.web.WebServer(pipeline, port);
+                    webServer.start();
+                    // Keep main thread alive
+                    Thread.currentThread().join();
+                    break;
+
                 case "eval":
                     EvalRunner evalRunner = new EvalRunner(pipeline);
                     evalRunner.runEvaluation();
@@ -117,6 +132,7 @@ public class Main {
         System.out.println("Bankesh Kumar — Career Assistant CLI");
         System.out.println("Usage: ./run.sh <command> [arguments]\n");
         System.out.println("Commands:");
+        System.out.println("  web [port]             Start web browser UI (default port: 8080)");
         System.out.println("  ask \"<question>\"       Ask a single question on Bankesh's experience");
         System.out.println("  \"<question>\"           Direct question shortcut (plug-and-play)");
         System.out.println("  interactive / chat     Start interactive Q&A session");
