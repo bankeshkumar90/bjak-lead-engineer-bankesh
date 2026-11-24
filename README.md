@@ -7,7 +7,11 @@
 
 ## 1. Quickstart — Under 2 Minutes (Zero Setup)
 
-The project is designed to be **100% plug-and-play**: it runs on any machine with standard Java 17+ (Java 21/25 tested). No background daemons or external servers are required to start asking questions immediately.
+The project is designed to be **100% plug-and-play**: it runs on any machine with standard Java 17+ (Java 21/25 tested), and is deployed live on Vercel for instant browser testing.
+
+### 🌐 Live Production Web Deployment (Vercel)
+The web application is hosted 24/7 with zero downtime, instant < 10ms responses, and a stylish **"✨ Ask about Bankesh"** button:  
+👉 **[https://bankeshportfoliochat.vercel.app/](https://bankeshportfoliochat.vercel.app/)**
 
 ### One-Command Execution
 ```bash
