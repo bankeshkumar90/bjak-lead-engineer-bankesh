@@ -417,10 +417,41 @@
       background: var(--surface);
     }
 
+    /* FLOATING CHAT BUTTON (FAB) */
+    .floating-ask-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--gradient-designer);
+      color: #FFFFFF;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.85rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.5), 0 8px 25px rgba(0, 0, 0, 0.4);
+      z-index: 999;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: floatGlow 3s infinite ease-in-out;
+    }
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); }
+      50% { transform: translateY(-4px); box-shadow: 0 0 40px rgba(129, 140, 248, 0.7); }
+    }
+    .floating-ask-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
     @media (max-width: 640px) {
       .hero-banner { flex-direction: column; align-items: flex-start; }
       .btn-designer-ask { width: 100%; justify-content: center; }
       .nav-actions { display: none; }
+      .floating-ask-btn { bottom: 5.5rem; right: 1rem; padding: 0.7rem 1.2rem; font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -481,6 +512,12 @@
       </button>
     </div>
   </main>
+
+  <!-- FLOATING CHAT BUTTON -->
+  <button id="floatingAskBtn" class="floating-ask-btn" onclick="handleDesignerAskClick()" title="Ask about Bankesh">
+    <span class="sparkle-icon">✨</span>
+    <span class="floating-btn-text">Ask about Bankesh</span>
+  </button>
 
   <footer>
     Bankesh Kumar Career Assistant &bull; Grounded in verified CV & Portfolio records &bull; 0% Hallucination Guarantee
