@@ -25,18 +25,28 @@ public class FallbackGenerator {
             result.setStatus(QueryResult.Status.REFUSED_UNANSWERABLE);
             result.setExecutionMode("FALLBACK_DETERMINISTIC_REFUSAL");
 
-            String prompt;
             if (isGreeting(query)) {
-                prompt = "Hello! Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering leadership.";
+                result.setAnswer(
+                        "Hello! Please ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering leadership.\n\n" +
+                        "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+                        "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, " +
+                        "speculate, or fabricate qualifications, employers, or metrics.");
             } else {
-                prompt = "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.";
+                result.setAnswer(
+                        "This inquiry is not covered by Bankesh Kumar's verified professional documentation. " +
+                        "As an AI career assistant representing Bankesh Kumar (Technical Lead | Senior Mobile & Platform Architect), " +
+                        "I am dedicated exclusively to answering questions grounded in his verified career records.\n\n" +
+                        "Please feel free to ask about Bankesh Kumar's verified profile and technical expertise, such as:\n" +
+                        "• Enterprise Mobile Platforms: React Native, Android (Kotlin), iOS (Swift), Jetpack Compose, Kotlin Multiplatform (KMM), and Clean Architecture / MVVM\n" +
+                        "• Flagship Systems: CabCharge white-label automotive taxi platform, Aviva insurance/wellbeing app, ZoomCar (Zoom One unified app), and Tekion OTT TV & RFID displays\n" +
+                        "• Backend Microservices: Spring Boot, Spring Cloud, Eureka, API Gateway, and Docker containerization\n" +
+                        "• Privacy-First Offline AI: Privacy-first offline AI workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker\n" +
+                        "• Engineering Leadership: Leading cross-functional teams of up to 22 engineers, delivering 30+ production apps across 8+ industry domains, and CMMI Level 5 standards\n\n" +
+                        "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+                        "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, " +
+                        "speculate, or fabricate qualifications, employers, or metrics.");
             }
-
-            result.setAnswer(prompt + "\n\n" +
-                    "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
-                    "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, " +
-                    "speculate, or fabricate qualifications, employers, or metrics.");
-            result.addAudit("Fallback: Low retrieval confidence or empty facts -> emitted clean deterministic refusal.");
+            result.addAudit("Fallback: Low retrieval confidence or empty facts -> emitted clean deterministic refusal with user guidance.");
             return result;
         }
 

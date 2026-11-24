@@ -599,16 +599,26 @@
       }
 
       // Out of scope Check
-      if (/(capital of|recipe for|weather in|poem|stock price)/i.test(lower)) {
+      if (/(capital\s+(of|city)\s+[a-z]+|(how\s+to\s+|recipe\s+(for|to)|how\s+do\s+i\s+)?(bake|cook|make)\s+[a-z]+|weather\s+(in|at|today)|write\s+.*?(poem|song|story|joke|haiku)|stock\s+price\s+of|who\s+won\s+the|calculate\s+\d+|translate\s+.*to|(write|implement|create)\s+(a\s+)?(python|java|javascript|c\+\+|rust|go|c)\s+(script|program|code|function|algorithm)|(quicksort|bubble\s+sort|binary\s+search|linked\s+list|fibonacci)|who\s+is\s+(the\s+)?(president|prime\s+minister|king|queen|elon\s+musk|bill\s+gates|jeff\s+bezos|sam\s+altman)|(fix|repair)\s+(a\s+)?(leaking|leak|water\s+pipe|pipe|sink|faucet|car|toilet)|(symptoms|treatment|remedies|remedy|cure)\s+(for|of)|(highest\s+grossing|best|top\s+\d+)\s+(movies|films|songs|albums))/i.test(lower)) {
         return {
           question: q,
           status: "REFUSED_OUT_OF_SCOPE",
           executionMode: "ROUTER_DETERMINISTIC_REFUSAL",
           latencyMs: Date.now() - start,
-          answer: "Refusal [Out of Scope]: I am an AI Career Assistant dedicated exclusively to Bankesh Kumar's professional experience, architecture projects, engineering leadership, and qualifications. I do not answer general knowledge, weather, creative writing, or external domain queries.",
+          answer: "Refusal [Out of Scope]: This inquiry is outside the scope of Bankesh Kumar's professional career documentation. " +
+            "I am an AI Career Assistant dedicated exclusively to Bankesh Kumar's professional experience, architecture projects, engineering leadership, and verified qualifications. " +
+            "I do not answer general knowledge, weather, cooking recipes, creative writing, health remedies, generic coding exercises, or external domain queries.\n\n" +
+            "Please feel free to ask about Bankesh Kumar's verified profile and technical expertise, such as:\n" +
+            "• Enterprise Mobile Platforms: React Native, Android (Kotlin), iOS (Swift), Jetpack Compose, Kotlin Multiplatform (KMM), and Clean Architecture / MVVM\n" +
+            "• Flagship Systems: CabCharge white-label automotive taxi platform, Aviva insurance/wellbeing app, ZoomCar (Zoom One unified app), and Tekion OTT TV & RFID displays\n" +
+            "• Backend Microservices: Spring Boot, Spring Cloud, Eureka, API Gateway, and Docker containerization\n" +
+            "• Privacy-First Offline AI: Privacy-first offline AI workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker\n" +
+            "• Engineering Leadership: Leading cross-functional teams of up to 22 engineers, delivering 30+ production apps across 8+ industry domains, and CMMI Level 5 standards\n\n" +
+            "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+            "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.",
           citedFactIds: [],
           sourceReferences: [],
-          auditTrail: ["Router: Out of scope inquiry -> clean refusal."]
+          auditTrail: ["Router: Out of scope inquiry -> clean refusal with user guidance."]
         };
       }
 
@@ -688,10 +698,20 @@
           status: "REFUSED_UNANSWERABLE",
           executionMode: "FALLBACK_DETERMINISTIC_REFUSAL",
           latencyMs: Date.now() - start,
-          answer: "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.\n\nI do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.",
+          answer: "This inquiry is not covered by Bankesh Kumar's verified professional documentation. " +
+            "As an AI career assistant representing Bankesh Kumar (Technical Lead | Senior Mobile & Platform Architect), " +
+            "I am dedicated exclusively to answering questions grounded in his verified career records.\n\n" +
+            "Please feel free to ask about Bankesh Kumar's verified profile and technical expertise, such as:\n" +
+            "• Enterprise Mobile Platforms: React Native, Android (Kotlin), iOS (Swift), Jetpack Compose, Kotlin Multiplatform (KMM), and Clean Architecture / MVVM\n" +
+            "• Flagship Systems: CabCharge white-label automotive taxi platform, Aviva insurance/wellbeing app, ZoomCar (Zoom One unified app), and Tekion OTT TV & RFID displays\n" +
+            "• Backend Microservices: Spring Boot, Spring Cloud, Eureka, API Gateway, and Docker containerization\n" +
+            "• Privacy-First Offline AI: Privacy-first offline AI workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker\n" +
+            "• Engineering Leadership: Leading cross-functional teams of up to 22 engineers, delivering 30+ production apps across 8+ industry domains, and CMMI Level 5 standards\n\n" +
+            "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+            "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.",
           citedFactIds: [],
           sourceReferences: [],
-          auditTrail: ["Retriever: No matching verified facts found -> clean refusal."]
+          auditTrail: ["Retriever: No matching verified facts found -> clean refusal with user guidance."]
         };
       }
 

@@ -24,15 +24,47 @@ const UNANSWERABLE_PRIVATE_PATTERNS = [
 ];
 
 const OUT_OF_SCOPE_PATTERNS = [
-  /capital\s+of\s+[a-z]+/i,
-  /recipe\s+(for|to)/i,
+  /capital\s+(of|city)\s+[a-z]+/i,
+  /(how\s+to\s+|recipe\s+(for|to)|how\s+do\s+i\s+)?(bake|cook|make)\s+[a-z]+/i,
   /weather\s+(in|at|today)/i,
-  /write\s+(a|me\s+a)?\s*(poem|song|story|joke|haiku)/i,
+  /(write|compose)\s+.*?(poem|song|story|joke|haiku|lyrics)/i,
   /stock\s+price\s+of/i,
   /who\s+won\s+the\s+(world\s+cup|super\s+bowl|election|match)/i,
   /calculate\s+\d+|what\s+is\s+\d+\s*[\+\-\*\/]\s*\d+/i,
-  /translate\s+.*\s+to\s+[a-z]+/i
+  /translate\s+.*\s+to\s+[a-z]+/i,
+  /(write|implement|create)\s+(a\s+)?(python|java|javascript|c\+\+|rust|go|c)\s+(script|program|code|function|algorithm)/i,
+  /(quicksort|bubble\s+sort|binary\s+search|linked\s+list|fibonacci)/i,
+  /who\s+is\s+(the\s+)?(president|prime\s+minister|king|queen|elon\s+musk|bill\s+gates|jeff\s+bezos|sam\s+altman)/i,
+  /(fix|repair)\s+(a\s+)?(leaking|leak|water\s+pipe|pipe|sink|faucet|car|toilet)/i,
+  /(symptoms|treatment|remedies|remedy|cure)\s+(for|of)\s+(the\s+)?(cold|flu|cough|headache|fever|covid)/i,
+  /(highest\s+grossing|best|top\s+\d+)\s+(movies|films|songs|albums)/i
 ];
+
+const OUT_OF_SCOPE_REFUSAL_MESSAGE =
+  "Refusal [Out of Scope]: This inquiry is outside the scope of Bankesh Kumar's professional career documentation. " +
+  "I am an AI Career Assistant dedicated exclusively to Bankesh Kumar's professional experience, architecture projects, engineering leadership, and verified qualifications. " +
+  "I do not answer general knowledge, weather, cooking recipes, creative writing, health remedies, generic coding exercises, or external domain queries.\n\n" +
+  "Please feel free to ask about Bankesh Kumar's verified profile and technical expertise, such as:\n" +
+  "• Enterprise Mobile Platforms: React Native, Android (Kotlin), iOS (Swift), Jetpack Compose, Kotlin Multiplatform (KMM), and Clean Architecture / MVVM\n" +
+  "• Flagship Systems: CabCharge white-label automotive taxi platform, Aviva insurance/wellbeing app, ZoomCar (Zoom One unified app), and Tekion OTT TV & RFID displays\n" +
+  "• Backend Microservices: Spring Boot, Spring Cloud, Eureka, API Gateway, and Docker containerization\n" +
+  "• Privacy-First Offline AI: Privacy-first offline AI workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker\n" +
+  "• Engineering Leadership: Leading cross-functional teams of up to 22 engineers, delivering 30+ production apps across 8+ industry domains, and CMMI Level 5 standards\n\n" +
+  "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+  "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.";
+
+const UNANSWERABLE_CORRECTION_MESSAGE =
+  "This inquiry is not covered by Bankesh Kumar's verified professional documentation. " +
+  "As an AI career assistant representing Bankesh Kumar (Technical Lead | Senior Mobile & Platform Architect), " +
+  "I am dedicated exclusively to answering questions grounded in his verified career records.\n\n" +
+  "Please feel free to ask about Bankesh Kumar's verified profile and technical expertise, such as:\n" +
+  "• Enterprise Mobile Platforms: React Native, Android (Kotlin), iOS (Swift), Jetpack Compose, Kotlin Multiplatform (KMM), and Clean Architecture / MVVM\n" +
+  "• Flagship Systems: CabCharge white-label automotive taxi platform, Aviva insurance/wellbeing app, ZoomCar (Zoom One unified app), and Tekion OTT TV & RFID displays\n" +
+  "• Backend Microservices: Spring Boot, Spring Cloud, Eureka, API Gateway, and Docker containerization\n" +
+  "• Privacy-First Offline AI: Privacy-first offline AI workflows utilizing Ollama, local Qwen (e.g. Qwen 3 8B), N8n, and Docker\n" +
+  "• Engineering Leadership: Leading cross-functional teams of up to 22 engineers, delivering 30+ production apps across 8+ industry domains, and CMMI Level 5 standards\n\n" +
+  "I do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. " +
+  "As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.";
 
 function isGreeting(query) {
   if (!query) return false;
@@ -126,13 +158,13 @@ module.exports = async (req, res) => {
     if (p.test(question)) {
       return res.status(200).json({
         question,
-        answer: "Refusal [Out of Scope]: I am an AI Career Assistant dedicated exclusively to Bankesh Kumar's professional experience, architecture projects, engineering leadership, and qualifications. I do not answer general knowledge, weather, creative writing, or external domain queries.",
+        answer: OUT_OF_SCOPE_REFUSAL_MESSAGE,
         status: 'REFUSED_OUT_OF_SCOPE',
         executionMode: 'ROUTER_DETERMINISTIC_REFUSAL',
         latencyMs: Date.now() - startTime,
         citedFactIds: [],
         sourceReferences: [],
-        auditTrail: ['Router: Query out of scope -> clean refusal.']
+        auditTrail: ['Router: Query out of scope -> clean refusal with user guidance.']
       });
     }
   }
@@ -244,7 +276,7 @@ module.exports = async (req, res) => {
   if (topFacts.length === 0) {
     return res.status(200).json({
       question,
-      answer: "Please feel free to ask about Bankesh Kumar's profile, career background, technical skills, mobile & platform architecture, or engineering achievements.\n\nI do not have verified records in Bankesh Kumar's professional documentation regarding this inquiry. As an AI career assistant representing Bankesh, I am strictly constrained to verified facts and do not extrapolate, speculate, or fabricate qualifications, employers, or metrics.",
+      answer: UNANSWERABLE_CORRECTION_MESSAGE,
       status: 'REFUSED_UNANSWERABLE',
       executionMode: 'FALLBACK_DETERMINISTIC_REFUSAL',
       latencyMs: Date.now() - startTime,
@@ -252,7 +284,7 @@ module.exports = async (req, res) => {
       sourceReferences: [],
       auditTrail: [
         'Router check passed: Query in-scope.',
-        'Retriever: Top score below threshold -> clean deterministic refusal.'
+        'Retriever: Top score below threshold -> clean deterministic refusal with user guidance.'
       ]
     });
   }
