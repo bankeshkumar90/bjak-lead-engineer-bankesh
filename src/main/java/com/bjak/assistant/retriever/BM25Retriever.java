@@ -66,12 +66,42 @@ public class BM25Retriever {
             }
         }
 
-        // If top score is negligible, flag as not confident
-        boolean confident = !resultFacts.isEmpty() && highestScore >= 0.15;
+        // If no facts were matched by exact terms but the query is in-scope or asking about Bankesh,
+        // provide the foundational overview facts so general inquiries receive comprehensive answers
+        if (resultFacts.isEmpty()) {
+            String lower = query.toLowerCase();
+            if (lower.contains("bankesh") || lower.contains("about") || lower.contains("who") ||
+                lower.contains("tell") || lower.contains("summary") || lower.contains("profile") ||
+                lower.contains("experience") || lower.contains("work")) {
+                List<String> defaultIds = List.of("FACT-001", "FACT-014", "FACT-021", "FACT-013", "FACT-006");
+                for (String id : defaultIds) {
+                    Fact f = factStore.getFact(id);
+                    if (f != null && !resultFacts.contains(f)) {
+                        resultFacts.add(f);
+                    }
+                }
+                highestScore = 5.0;
+            }
+        }
+
+        // Confident if we have facts and score >= 0.05
+        boolean confident = !resultFacts.isEmpty() && highestScore >= 0.05;
         return new RetrievalResult(resultFacts, confident, highestScore);
     }
 
     private void applyMetadataBoosts(String query, Map<String, Double> scoreMap) {
+        // Boost for Overview / Introduction / "About Bankesh"
+        if (query.contains("about") || query.contains("who is") || query.contains("who are you") ||
+            query.contains("tell me") || query.contains("summary") || query.contains("overview") ||
+            query.contains("profile") || query.contains("background") || query.contains("intro") ||
+            query.contains("bankesh") || query.contains("yourself")) {
+            boost(scoreMap, "FACT-001", 5.0);
+            boost(scoreMap, "FACT-014", 5.5);
+            boost(scoreMap, "FACT-021", 5.0);
+            boost(scoreMap, "FACT-013", 4.0);
+            boost(scoreMap, "FACT-006", 4.0);
+        }
+
         // Boost for current role / Wipro
         if (query.contains("current") || query.contains("present") || query.contains("wipro")) {
             boost(scoreMap, "FACT-001", 3.5);
