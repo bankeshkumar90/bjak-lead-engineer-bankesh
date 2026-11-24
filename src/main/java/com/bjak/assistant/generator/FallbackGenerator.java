@@ -75,6 +75,20 @@ public class FallbackGenerator {
     private boolean isOverviewQuery(String query) {
         if (query == null) return false;
         String lower = query.toLowerCase().trim();
+
+        // If query mentions specific projects, tech, or employers, treat as targeted inquiry rather than overview
+        if (lower.contains("mqtt") || lower.contains("rfid") || lower.contains("spring") ||
+            lower.contains("taxi") || lower.contains("cabcharge") || lower.contains("aviva") ||
+            lower.contains("zoomcar") || lower.contains("tekion") || lower.contains("zibal") ||
+            lower.contains("quarks") || lower.contains("triazine") || lower.contains("domino") ||
+            lower.contains("stratagem") || lower.contains("n-radius") || lower.contains("smartcat") ||
+            lower.contains("advicefit") || lower.contains("compose") || lower.contains("kmm") ||
+            lower.contains("degree") || lower.contains("college") || lower.contains("contact") ||
+            lower.contains("email") || lower.contains("phone") || lower.contains("location") ||
+            lower.contains("transition") || lower.contains("salary")) {
+            return false;
+        }
+
         return lower.contains("tell me about bankesh") ||
                lower.contains("who is bankesh") ||
                lower.contains("tell me about yourself") ||
@@ -86,7 +100,7 @@ public class FallbackGenerator {
                lower.contains("tell me about him") ||
                lower.equals("bankesh") ||
                lower.equals("bankesh kumar") ||
-               (lower.contains("about") && lower.contains("bankesh")) ||
-               (lower.contains("summary") && lower.contains("bankesh"));
+               (lower.contains("about") && lower.contains("bankesh") && lower.length() < 35) ||
+               (lower.contains("summary") && lower.contains("bankesh") && lower.length() < 35);
     }
 }
