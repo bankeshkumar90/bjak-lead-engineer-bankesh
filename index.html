@@ -440,6 +440,28 @@
       align-items: center;
       justify-content: space-between;
     }
+    .sources-scroll-container {
+      max-height: 152px; /* Displays 5 fact references cleanly, remaining items scroll smoothly */
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 0.35rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(56, 189, 248, 0.4) rgba(15, 23, 42, 0.6);
+    }
+    .sources-scroll-container::-webkit-scrollbar {
+      width: 5px;
+    }
+    .sources-scroll-container::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 4px;
+    }
+    .sources-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.4);
+      border-radius: 4px;
+    }
+    .sources-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
     .source-item {
       color: var(--text-muted);
       margin-bottom: 0.35rem;
@@ -1298,21 +1320,28 @@
 
       let sourcesHtml = '';
       if (data.sourceReferences && data.sourceReferences.length > 0) {
+        const count = data.sourceReferences.length;
+        const scrollNotice = count > 5
+          ? `Showing 5 of ${count} • Scroll inside for more`
+          : 'Click badge to verify';
+
         sourcesHtml = `
           <div class="card-sources">
             <div class="sources-title">
-              <span>Verified Sources & Atomic Citations</span>
-              <span style="font-size: 0.68rem; color: var(--text-dim); text-transform: none; font-weight: 500;">Click badge to verify</span>
+              <span>Verified Sources & Atomic Citations (${count})</span>
+              <span style="font-size: 0.68rem; color: var(--primary); text-transform: none; font-weight: 600; opacity: 0.85;">${scrollNotice}</span>
             </div>
-            ${data.sourceReferences.map(src => {
-              const tagMatch = src.match(/^\[(.*?)\]/);
-              const tag = tagMatch ? tagMatch[1] : '';
-              const rest = tagMatch ? src.substring(tagMatch[0].length).trim() : src;
-              return `<div class="source-item">
-                <button class="fact-tag-btn" onclick="openFactModal('${escapeHtml(tag)}')">[${escapeHtml(tag)}]</button>
-                <span>${escapeHtml(rest)}</span>
-              </div>`;
-            }).join('')}
+            <div class="sources-scroll-container">
+              ${data.sourceReferences.map(src => {
+                const tagMatch = src.match(/^\[(.*?)\]/);
+                const tag = tagMatch ? tagMatch[1] : '';
+                const rest = tagMatch ? src.substring(tagMatch[0].length).trim() : src;
+                return `<div class="source-item">
+                  <button class="fact-tag-btn" onclick="openFactModal('${escapeHtml(tag)}')">[${escapeHtml(tag)}]</button>
+                  <span>${escapeHtml(rest)}</span>
+                </div>`;
+              }).join('')}
+            </div>
           </div>
         `;
       }
