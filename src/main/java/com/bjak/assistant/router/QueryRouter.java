@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 public class QueryRouter {
 
     private static final List<Pattern> INJECTION_PATTERNS = List.of(
-            Pattern.compile("(?i)ignore\\s+(all|any|previous|above|prior|the)*\\s*(all|any|previous|above|prior)*\\s*instructions?"),
-            Pattern.compile("(?i)disregard\\s+(all|any|previous|above|prior|the)*\\s*(all|any|previous|above|prior)*\\s*instructions?"),
+            Pattern.compile("(?i)ignore\\s+(all|any|previous|above|prior|the)*\\s*(all|any|previous|above|prior)*\\s*(instructions?|rules?|constraints?|prompts?)"),
+            Pattern.compile("(?i)disregard\\s+(all|any|previous|above|prior|the)*\\s*(all|any|previous|above|prior)*\\s*(instructions?|rules?|constraints?|prompts?)"),
             Pattern.compile("(?i)fabricate|exaggerate"),
             Pattern.compile("(?i)you\\s+are\\s+now\\s+(a|an)?\\s*.*"),
             Pattern.compile("(?i)pretend\\s+(you\\s+are|to\\s+be)"),
@@ -22,7 +22,7 @@ public class QueryRouter {
             Pattern.compile("(?i)reveal\\s+(the|your)?\\s*(system\\s+prompt|instructions?|hidden\\s+prompt)"),
             Pattern.compile("(?i)system\\s+prompt"),
             Pattern.compile("(?i)jailbreak|dan\\s+mode|developer\\s+mode"),
-            Pattern.compile("(?i)<script.*?>|eval\\s*\\(|javascript:"),
+            Pattern.compile("(?i)<script.*?>|eval\\s*\\(|javascript:|drop\\s+table|select\\s+\\*\\s+from|union\\s+select"),
             Pattern.compile("(?i)forget\\s+(all|everything|previous)"),
             Pattern.compile("(?i)override\\s+(safety|rules|instructions)")
     );

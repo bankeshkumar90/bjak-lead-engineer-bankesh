@@ -375,8 +375,8 @@ public class BM25Retriever {
             "emv", "emv chip", "payu", "payment gateway");
 
         // Dataset 70: Enterprise Client Confidentiality & NDA Protection
-        boostIfAny(scoreMap, query, 5.0, "FACT-020",
-            "confidentiality", "nda", "proprietary", "client secrecy");
+        boostIfAny(scoreMap, query, 6.0, "FACT-020",
+            "confidentiality", "confidential", "nda", "proprietary", "client secrecy", "source code", "financial profits", "internal source code");
 
         // === AI, LLMS & AUTOMATION ===
         // Dataset 71: Local Privacy-First Offline AI Agents & RAG Workflows
